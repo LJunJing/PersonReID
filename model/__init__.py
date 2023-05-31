@@ -1,0 +1,1 @@
+from .FFusion import FFusion_cnn, FFusion_deit
