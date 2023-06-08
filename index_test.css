@@ -1,0 +1,199 @@
+body,
+html {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+}
+body::-webkit-scrollbar {
+  width: 0px;
+}
+* {
+  box-sizing: border-box;
+  /* border: 1px solid red; */
+}
+
+body { display: flex; flex-direction: column;}
+/*.header {*/
+/*    position: fixed;*/
+/*    height: 70px; width: 300px;*/
+/*    top: 0; right: 0; left: 0;*/
+/*    line-height: 30px;*/
+/*    flex-shrink: 0;*/
+/*    align-content: center;*/
+/*    background-color: rgba(224, 224, 224, 0.5);*/
+/*}*/
+
+/*.sidebarControl {*/
+/*    position: fixed;*/
+/*    left: 10px;*/
+/*    top: 22px;*/
+/*    display: inline-block;*/
+/*    cursor: pointer;*/
+/*    transition: all 0.7s ease 0ms;*/
+/*}*/
+
+/*.bar{*/
+/*  width: 30px;*/
+/*  height: 5px;*/
+/*  background-color: rgba(0, 0, 0, 0.7);*/
+/*  margin: 3px 0;*/
+/*  transition: 0.4s;*/
+/*}*/
+
+/*#sideToggle {*/
+/*    display: none;*/
+/*}*/
+/*#sideToggle:checked + .content{left: 5px}*/
+/*#sideToggle:checked ~ .sidebar{display: none} .content{left: 302px}*/
+
+/*-------------侧边栏-------------*/
+.sidebar {
+    position: fixed;
+    left: 0;
+    /*left: 0; top: 0; bottom: 0;*/
+    width: 300px; height: 100%;
+    color: rgb(0, 0, 0);
+    background-color: rgba(224, 224, 224, 0.5);
+    /*display: block;*/
+}
+
+.main-title {
+    margin-left: 30px;
+    height: 70px;
+    font-size: 30px;
+    font-family: "KaiTi_GB2312";
+    font-weight: bold;
+    line-height: 70px;
+    color: rgb(0, 0, 0);
+}
+
+.menu {
+    margin-top: 1rem;
+    color: rgb(0, 0, 0);
+}
+.menu-title {
+    height: 30px;
+    line-height: 30px;
+    font-size: 10px;
+    font-family: "KaiTi_GB2312";
+    text-align: left;
+    /*cursor: pointer;*/
+    margin: 20px 10px 0 20px;
+}
+
+.menu select{
+    width: 250px; height: 30px;
+    border: 1px solid rgba(224, 224, 224, 0.5);  /*边框线*/
+    color: rgb(0, 0, 0);             /*字体颜色*/
+    outline:none;                 /*去掉黑框*/
+    margin: 5px 15px 10px 15px;        /*外边距*/
+    font-size: 10px;              /*字体大小*/
+    font-family: "KaiTi_GB2312";
+  }
+.menu option{
+    width: 160px;
+    height: 40px;
+    font-family: "KaiTi_GB2312";
+  }
+
+/*------------内容--------------*/
+.content {
+    position: absolute;
+    left: 302px;
+    /*background-color: rgb(105, 235, 205);*/
+}
+.wrapper {
+    position: relative;
+    height: fit-content;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 50px;
+    background-color: aliceblue;
+    border-bottom: 1px solid rgba(224, 224, 224, 0.5);
+}
+.content-title {
+    height: 30px;
+    line-height: 30px;
+    font-size: 20px;
+    font-family: "KaiTi_GB2312";
+    text-align: left;
+    margin: 20px 10px 20px 20px;
+}
+
+.img-wrapper {
+    position: relative;
+    height: 100px; width: 100px;
+    bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border: 1px dashed rgba(224, 224, 224, 0.5);
+}
+
+.add-icon {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 8px;
+}
+.add-text {
+    color: #999;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.picUpload {
+      position: absolute;
+      /*top: 0; right: 0; bottom: 0; left: 0;*/
+      outline: medium none;
+      cursor: pointer;
+      -moz-opacity: 0;
+      opacity: 0;
+      filter: alpha(opacity=0);
+}
+
+/*.content {*/
+/*  display: flex;*/
+/*  flex-grow: 1;*/
+/*}*/
+.left {
+  width: 200px;
+  flex-shrink: 0;
+  height: 100%;
+  background-color: rgb(33, 37, 41);
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
+}
+.right {
+  flex-grow: 1;
+  padding: 1rem;
+}
+
+
+.menu:first-child {
+  margin-top: 0;
+}
+.submenu {
+  height: 40px;
+  line-height: 40px;
+  font-size: 10px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.submenu {
+  height: 0px;
+  line-height: 0px;
+  overflow: hidden;
+}
+
+.menu.active .submenu {
+  height: 40px;
+  line-height: 40px;
+}
+
+.menu {
+  text-align: center;
+}
