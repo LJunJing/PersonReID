@@ -2,7 +2,7 @@ import os
 import torch
 import torch.nn as nn
 from datasets import dataloader
-from model.FFusion import FFusion, FFusion_cnn
+from model.FFusion import FFusion, FFusion_cnn, FFusion_deit
 from utils import R1_mAP_eval
 from utils.logger import setup_logger
 
@@ -50,8 +50,8 @@ if __name__ == "__main__":
     train_loader, val_loader, num_query, num_classes, cam_num, view_num = dataloader('market1501')
 
     # -----------加载模型----------------
-    model = FFusion_cnn(num_classes=num_classes)
-    # model = FFusion_deit(num_classes=num_classes)
+    # model = FFusion_cnn(num_classes=num_classes)
+    model = FFusion_deit(num_classes=num_classes)
     # model = FFusion(num_classes=num_classes)
     model_name = model.name()
     model.load_param('logs/{}/{}_100.pth'.format(model_name, model_name)) #加载预训练好的参数

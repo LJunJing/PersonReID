@@ -457,7 +457,6 @@ def deit_small_patch16_224(img_size=(256, 128), stride_size=16, drop_path_rate=0
         img_size=img_size, patch_size=16, stride_size=stride_size, embed_dim=384, depth=12, num_heads=6, mlp_ratio=4, qkv_bias=True,
         drop_path_rate=drop_path_rate, drop_rate=drop_rate, attn_drop_rate=attn_drop_rate, camera=camera, view=view, sie_xishu=sie_xishu, local_feature=local_feature,
         norm_layer=partial(nn.LayerNorm, eps=1e-6), **kwargs)
-
     return model
 
 

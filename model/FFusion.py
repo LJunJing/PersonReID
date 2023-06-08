@@ -7,6 +7,7 @@ import torch.nn.functional as F
 import numpy as np
 
 from model.backbones.Transformer import deit_small_patch16_224 as Deit
+from model.backbones.Transformer import vit_base_patch16_224 as deit_base
 
 
 def weights_init_classifier(m):
@@ -318,15 +319,22 @@ class FFusion_deit(nn.Module):
     def __init__(self, num_classes, dropout=0.2, pretrained=True):
         super(FFusion_deit, self).__init__()
 
-        self.trans = Deit()
+        # self.trans = Deit()
+        # if pretrained:
+        #     self.trans.load_param('pretrained/deit_base_distilled_patch16_224-df68dfff.pth')
+
+        self.trans = deit_base()
+        if pretrained:
+            self.trans.load_param('pretrained/deit_base_distilled_patch16_224-df68dfff.pth')
+
         self.model_name = 'deit'
 
         self.drop = nn.Dropout2d(dropout)
 
-        self.classifier = nn.Linear(384, num_classes, bias=False)
+        self.classifier = nn.Linear(768, num_classes, bias=False)
         self.classifier.apply(weights_init_classifier)
 
-        self.bottleneck = nn.BatchNorm1d(384)
+        self.bottleneck = nn.BatchNorm1d(768)
         self.bottleneck.bias.requires_grad_(False)
         self.bottleneck.apply(weights_init_kaiming)
 
@@ -374,7 +382,6 @@ class FFusion_deit(nn.Module):
                 print('shape do not match in k :{}: param_dict{} vs self.state_dict(){}'.format(k, v.shape,
                                                                                                 self.state_dict()[
                                                                                                     k].shape))
-
 class FFusion(nn.Module):
     def __init__(self, num_classes, dropout=0.2, pretrained=True, normal_init=True):
         super(FFusion, self).__init__()
@@ -387,8 +394,10 @@ class FFusion(nn.Module):
         self.cnn.layer4 = nn.Identity()
 
         self.trans = Deit()
+        if pretrained:
+            self.trans.load_param('pretrained/deit_base_distilled_patch16_224-df68dfff.pth')
 
-        self.bottleneck = nn.BatchNorm1d(384)
+        self.bottleneck = nn.BatchNorm1d(768)
         self.bottleneck.bias.requires_grad_(False)
         self.bottleneck.apply(weights_init_kaiming)
 
@@ -426,7 +435,7 @@ class FFusion(nn.Module):
 
         self.drop = nn.Dropout2d(dropout)
 
-        self.classifier = nn.Linear(384, num_classes, bias=False)
+        self.classifier = nn.Linear(768, num_classes, bias=False)
         self.classifier.apply(weights_init_classifier)
 
         if normal_init:

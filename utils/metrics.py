@@ -215,6 +215,7 @@ class R1_mAP_eval():
 
     def update(self, output):  # called once for each batch
         feat, pid, camid = output
+        # print("feat",type(feat))
         self.feats.append(feat.cpu())
         self.pids.extend(np.asarray(pid))
         self.camids.extend(np.asarray(camid))

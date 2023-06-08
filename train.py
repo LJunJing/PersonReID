@@ -13,7 +13,7 @@ from torch.cuda import amp
 from utils.logger import setup_logger
 from model.FFusion import FFusion_cnn, FFusion_deit, FFusion
 from datasets.dataloader import dataloader
-from model.backbones import ResNet50, ViT, DeiT
+from model.backbones import ResNet50
 from loss.make_loss import make_loss
 from solver import make_optimizer, make_scheduler
 from utils import AverageMeter, R1_mAP_eval
@@ -143,9 +143,9 @@ if __name__=='__main__':
 
     # 加载模型
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = FFusion_cnn(num_classes=num_classes).to(device)
+    # model = FFusion_cnn(num_classes=num_classes).to(device)
     # model = FFusion_deit(num_classes=num_classes).to(device)
-    # model = FFusion(num_classes=num_classes).to(device)
+    model = FFusion(num_classes=num_classes).to(device)
     model_name = model.name()
 
     # print("-------------------------------------模型加载成功----------------------------")
