@@ -243,7 +243,7 @@ if __name__ == "__main__":
         transformers.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
 
-    dataset_name = 'market1501'  # 需获取，字符串
+    dataset_name = 'market1501'  # 需从侧边栏获取，字符串
 
     queryDir = 'data/{}/query/'.format(dataset_name)
     query_tarDir = 'data/inference/query/'
@@ -255,12 +255,12 @@ if __name__ == "__main__":
 
     # query_path = 'data/inference/query/query.jpg'
     query_path = get_img(queryDir, 1, query_tarDir)
-    query = read_image(query_tarDir+query_path[0])  # 需展示，图片
+    query = read_image(query_tarDir+query_path[0])  # 需展示到query部分，read_image函数传入一张图片的路径，返回这张图片。
     query = infer_transforms(query).unsqueeze(0).to(device)  # [1,3,256,128]
     query_feat = model(query) # [1,1024]
     # print("query_feat", query_feat.shape)
 
-    gallery_num = 5  # 需获取，整数类型，预先定义为5
+    gallery_num = 5  # 需从侧边栏获取，整数类型，预先定义为5
     gallery_rate = get_img(galleryDir, gallery_num, gallery_tarDir)
     gallery_path = glob.glob(osp.join('data/inference/gallery', '*.jpg'))
 
@@ -269,12 +269,12 @@ if __name__ == "__main__":
     gallery_feat = []
     for idx, img_path in enumerate(gallery_path):
         with torch.no_grad():
-            gallery = read_image(img_path)  # 需展示，图片
+            gallery = read_image(img_path)  # 需展示到gallery部分，每次展示一张图片，img_path代表需展示图片的路径
             gallery = infer_transforms(gallery).unsqueeze(0).to(device)
             gallery_feat = model(gallery)  # [1,1024]
             # print(type(gallery))
             # gallery_feats.append(gallery_feat.cpu())
-            distmat = euclidean_distance(query_feat, gallery_feat) #将distmat展示在相应图片下方，浮点
+            distmat = euclidean_distance(query_feat, gallery_feat) #将distmat展示在相应gallery图片下方，浮点
             print(distmat, img_path[-23:])
 
     # gallery_feats = torch.tensor(gallery_feat)
